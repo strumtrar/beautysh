@@ -1,6 +1,0 @@
-[submodule "bashlex"]
-	path = beautysh/bashlex
-	url = git@github.com:idank/bashlex.git
-[submodule "beautysh/result"]
-	path = beautysh/result
-	url = git@github.com:dbrgn/result.git

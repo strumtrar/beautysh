@@ -73,7 +73,7 @@ class Beautysh:
                             type=str,
                             choices={"fnpar", "fnonly", "paronly"},
                             help="Force a specific Bash function formatting. "
-                            "See below for more info.")
+                            "See docs for more info.")
         parser.add_argument('--version',
                             '-v',
                             action='store_true',

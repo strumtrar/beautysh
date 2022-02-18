@@ -3,17 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "github:numtide/flake-utils";
     poetry2nix = {
       url = "github:nix-community/poetry2nix";
       inputs = {
-        flake-utils.follows = "utils";
+        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
       };
     };
   };
 
-  outputs = { self, nixpkgs, poetry2nix, utils }:
+  outputs = { self, nixpkgs, poetry2nix, flake-utils }:
     let
       inherit (nixpkgs) lib;
       pyVersions = map (v: "python${v}") [ "37" "38" "39" "310" ];
@@ -35,7 +35,7 @@
           };
         in
         lib.composeManyExtensions ([ poetry2nix.overlay ] ++ (map addBeautysh pyVersions));
-    } // utils.lib.eachDefaultSystem (system:
+    } // flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; overlays = [ self.overlay ]; };
         pyLatest = lib.last pyVersions;
